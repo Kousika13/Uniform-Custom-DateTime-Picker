@@ -1,0 +1,15 @@
+@import '{}/node_modules/antd/dist/antd.less';
+body {
+  padding: 10px;
+  font-family: sans-serif;
+  text-align: center
+}
+.ant-time-picker  {
+  margin: 0px 20px !important;
+}
+.ant-time-picker-panel-clear-btn {
+  display: none !important;
+}
+.value-container{
+  margin: 20px;
+}
