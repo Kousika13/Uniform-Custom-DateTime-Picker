@@ -15,13 +15,13 @@
     "moment": "^2.22.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "simpl-schema": "^1.5.3",
     "uniforms": "^1.27.0",
     "uniforms-antd": "^1.27.0"
   },
   "meteor": {
     "mainModule": {
-      "client": "client/main.js",
-      "server": "server/main.js"
+      "client": "client/main.js"
     },
     "testModule": "tests/main.js"
   }
