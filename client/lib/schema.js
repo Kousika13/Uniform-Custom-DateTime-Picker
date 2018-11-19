@@ -17,7 +17,6 @@ const schema = new SimpleSchema({
     type: Date,
     custom: function () {
       if (this.value > this.field('timeRange.stop').value) {
-        console.log('inside sart validator', this.value);
         return "startRangeError";
       }
     }
@@ -26,7 +25,6 @@ const schema = new SimpleSchema({
     type: Date,
     custom: function () {
       if (this.value < this.field('timeRange.start').value) {
-        console.log('inside end validator', this.value);
         return "stopRangeError";
       }
     }
