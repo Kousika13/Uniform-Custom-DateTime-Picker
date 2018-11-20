@@ -6,28 +6,27 @@ import moment from 'moment';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 
-const transformValues = (startDate, stopDate, onChange) => {
-  onChange({ start: transformDate(startDate, 'date'), stop: transformDate(stopDate, 'date')} );
+const transformValues = (start, stop, onChange) => {
+  onChange(transformDate(start, stop, 'date'));
 }
 
-const transformDate = (date, selector) => {
-  if(selector === 'date')  {
-     if(date && date instanceof moment) {
-        return date.toDate();
-     }
-     return date;
+const transformDate = (start, stop, selector) => {
+  if (selector === "date") {
+    return {
+      start: start && start instanceof moment ? start.toDate() : start,
+      stop: stop && stop instanceof moment ? stop.toDate() : stop
+    };
   }
 
-  if(selector === 'moment') {
-      return date ? moment(date) : date;
+  if (selector === "moment") {
+    return start ? moment(start) : start;
   }
-  return date;
-} 
+}; 
 
 const TimeRange = ({ onChange, value:{start, stop}, ...props }) => (
 <section>
-  <TimePicker {...filterDOMProps(props)} name="start" label="start" value={transformDate(start, 'moment')} onChange={start => transformValues(start, stop, onChange)} />
-  <TimePicker {...filterDOMProps(props)} name="stop" label="stop" value={transformDate(stop, 'moment')} onChange={stop => transformValues(start, stop, onChange)} />
+  <TimePicker {...filterDOMProps(props)} name="start" label="start" value={transformDate(start, null, 'moment')} onChange={start => transformValues(start, stop, onChange)} />
+  <TimePicker {...filterDOMProps(props)} name="stop" label="stop" value={transformDate(stop, null, 'moment')} onChange={stop => transformValues(start, stop, onChange)} />
 </section>
 );
 

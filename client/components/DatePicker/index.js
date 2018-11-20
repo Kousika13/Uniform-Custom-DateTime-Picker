@@ -6,25 +6,24 @@ import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
-const transformValues = (startDate, stopDate, onChange) => {
-    onChange({ start: transformDate(startDate, 'date'), stop: transformDate(stopDate, 'date')} );
-}
+const transformValues = (start, stop, onChange) => {
+  onChange(transformDate(start, stop, "date"));
+};
 
-const transformDate = (date, selector) => {
-    if(selector === 'date')  {
-        return date ? date.toDate() : date;
-    }
-
-    if(selector === 'moment') {
-        return date ? moment(date) : date;
-    }
-
-    return date;
-}
+const transformDate = (start, stop, selector) => {
+  if (selector === "date") {
+    return {
+      start: start ? start.toDate() : start,
+      stop: stop ? stop.toDate() : stop
+    };
+  } 
+  if (selector === "moment") {
+    return [start ? moment(start) : start, stop ? moment(stop) : stop];
+  }
+};
 
 const DateRange = ({onChange, value: { start, stop }, ...props }) => (
-   <RangePicker {...filterDOMProps(props)} value={[transformDate(start, 'moment'), transformDate(stop, 'moment')]} onChange={dates => transformValues(dates[0], dates[1], onChange)} />
+   <RangePicker {...filterDOMProps(props)} value={transformDate(start, stop, 'moment')} onChange={dates => transformValues(dates[0], dates[1], onChange)} />
 );
-
 
 export default connectField(DateRange);
